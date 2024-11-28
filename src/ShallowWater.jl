@@ -6,6 +6,7 @@ include("adjoint.jl")
 include("visualization.jl")
 
 export ShallowWaterProblem1D
+export ShallowWaterProblem2D
 export DiscreteAcceleration1D
 export DiscreteAcceleration2D
 export optimize

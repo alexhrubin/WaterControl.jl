@@ -41,6 +41,76 @@ struct ShallowWaterProblem1D
 end
 
 
+struct ShallowWaterProblem2D
+    # Physical parameters
+    Lx::Float64    # domain length in x direction
+    Ly::Float64    # domain length in y direction
+    nx::Int       # number of spatial points in x direction
+    ny::Int       # number of spatial points in y direction
+    ν::Float64    # bulk viscosity coefficient
+    μ::Float64    # artificial diffusion
+    
+    # Grid
+    dx::Float64
+    dy::Float64
+    x::Vector{Float64}
+    y::Vector{Float64}
+    
+    # Time settings
+    tspan::Tuple{Real,Real}
+    
+    # Initial conditions
+    h0::Vector{Float64}
+    u0::Vector{Float64}
+    v0::Vector{Float64}
+    
+    # Target state
+    target::Vector{Float64}
+    
+    # Constructor
+    function ShallowWaterProblem2D(
+        target::Vector{Float64};
+        Lx=10.0,
+        Ly=10.0,
+        nx=100,
+        ny=100,
+        ν=0.8,
+        μ=0.1,
+        tspan=(0.0,10.0)
+    )
+        @assert length(target) == nx * ny "Target length must match nx * ny"
+        
+        dx = Lx / nx
+        x = LinRange(0, Lx, nx)
+
+        dy = Ly / ny
+        y = LinRange(0, Ly, ny)
+        
+        h0 = ones(nx * ny)
+        u0 = zeros(nx * ny)
+        v0 = zeros(nx * ny)
+        
+        new(
+            Lx,
+            Ly,
+            nx,
+            ny,
+            ν,
+            μ,    # physical parameters
+            dx,
+            dy,
+            collect(x),  # grid (collect to make x a Vector)
+            collect(y),
+            tspan,  # time settings
+            h0,
+            u0,
+            v0,         # initial conditions
+            target
+        )
+    end
+end
+
+
 mutable struct DiscreteAcceleration1D
     values::Vector{Float64}
     times::Vector{Float64}
