@@ -1,4 +1,4 @@
-module ShallowWater
+module WaterControl
 
 include("types.jl")
 include("dynamics.jl")
