@@ -1,4 +1,4 @@
-# WaterControl
+# WaterControl.jl
 
 This is a small research project to see if we can answer the following questions:
 
@@ -7,7 +7,7 @@ This is a small research project to see if we can answer the following questions
 We model the water with the shallow water equations, assume the acceleration is piecewise constant in time, and then perform adjoint optimization over the acceleration to minimize the loss function
 
 $$
-O = \frac{1}{2} \int \int \left| h(x,y,T) - h_\text{target}(x,y) \right|^2 \, dA
+O = \frac{1}{2} \iint \left| h(x,y,T) - h_\text{target}(x,y) \right|^2  dA
 $$
 
 This is a work in progress. Check out the example notebooks.
