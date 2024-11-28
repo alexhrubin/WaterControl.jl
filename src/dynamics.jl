@@ -43,7 +43,7 @@ function create_second_spatial_derivative_matrix(nx::Int, dx::Float64, is_veloci
 end
 
 
-function solve_forward(problem::ShallowWaterProblem, acceleration::DiscreteAcceleration)
+function solve_forward_1D(problem::ShallowWaterProblem1D, acceleration::DiscreteAcceleration1D)
     # Modified shallow water equations with container motion
     nx = problem.nx
     dx = problem.dx

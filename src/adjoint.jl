@@ -2,7 +2,7 @@ using LinearAlgebra
 using Trapz
 
 
-function jacobian!(j, h, u, prob::ShallowWaterProblem)
+function jacobian!(j, h, u, prob::ShallowWaterProblem1D)
     nx = prob.nx
     dx = prob.dx
     μ = prob.μ
@@ -98,7 +98,7 @@ end
 
 function update_control(acc, grad, α=1.0)
     new_values = acc.values .- α * grad
-    return DiscreteAcceleration(new_values, acc.times)
+    return DiscreteAcceleration1D(new_values, acc.times)
 end
 
 
@@ -111,7 +111,7 @@ end
 
 function adjoint_gradient(prob, acc)
     # Solve forward in time
-    sol = solve_forward(prob, acc)
+    sol = solve_forward_1D(prob, acc)
     
     # Solve adjoint equation
     sol_adj = solve_adjoint(sol, prob, acc)
@@ -121,29 +121,29 @@ function adjoint_gradient(prob, acc)
 end
 
 
-function optimize(prob::ShallowWaterProblem)
+function optimize(prob::ShallowWaterProblem1D)
     max_time = prob.tspan[2]
     acc_points = 50
     # acc = DiscreteAcceleration(0.1 * randn(acc_points), collect(LinRange(0, max_time, acc_points + 1)))
-    acc = DiscreteAcceleration(zeros(acc_points), collect(LinRange(0, max_time, acc_points + 1)))
+    acc = DiscreteAcceleration1D(zeros(acc_points), collect(LinRange(0, max_time, acc_points + 1)))
     
     current_err = 1
     α = 1.0
     min_α = 1e-7  # Prevent step size from getting too small
     
     while current_err > 0.001
-        sol = solve_forward(prob, acc)
+        sol = solve_forward_1D(prob, acc)
         current_err = objective(sol, prob.target)
         println("Objective: $current_err")
 
         grad = adjoint_gradient(prob, acc)
         acc_new = update_control(acc, grad, α)
         
-        f_new = objective(solve_forward(prob, acc_new), prob.target)
+        f_new = objective(solve_forward_1D(prob, acc_new), prob.target)
         while f_new > current_err && α > min_α
             α *= 0.8
             acc_new = update_control(acc, grad, α)
-            f_new = objective(solve_forward(prob, acc_new), prob.target)
+            f_new = objective(solve_forward_1D(prob, acc_new), prob.target)
         end
         
         if α <= min_α && f_new > current_err
