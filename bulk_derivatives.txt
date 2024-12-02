@@ -1,0 +1,45 @@
+
+For h[i, j] looking at h[_, _]:
+∂h[i, j]/∂h[i, -1 + j] = μ/Power(dx,2) + u(i,j)/(2.*dx)
+∂h[i, j]/∂h[i, j] = (-2*μ)/Power(dx,2) - (2*μ)/Power(dy,2) - (-u(i,-1 + j) + u(i,1 + j))/(2.*dx) - (-v(-1 + i,j) + v(1 + i,j))/(2.*dy)
+∂h[i, j]/∂h[i, 1 + j] = μ/Power(dx,2) - u(i,j)/(2.*dx)
+∂h[i, j]/∂h[-1 + i, j] = μ/Power(dy,2) + v(i,j)/(2.*dy)
+∂h[i, j]/∂h[1 + i, j] = μ/Power(dy,2) - v(i,j)/(2.*dy)
+
+For h[i, j] looking at u[_, _]:
+∂h[i, j]/∂u[i, j] = -0.5*(-h(i,-1 + j) + h(i,1 + j))/dx
+∂h[i, j]/∂u[i, -1 + j] = h(i,j)/(2.*dx)
+∂h[i, j]/∂u[i, 1 + j] = -0.5*h(i,j)/dx
+
+For h[i, j] looking at v[_, _]:
+∂h[i, j]/∂v[i, j] = -0.5*(-h(-1 + i,j) + h(1 + i,j))/dy
+∂h[i, j]/∂v[-1 + i, j] = h(i,j)/(2.*dy)
+∂h[i, j]/∂v[1 + i, j] = -0.5*h(i,j)/dy
+
+For u[i, j] looking at h[_, _]:
+∂u[i, j]/∂h[i, -1 + j] = g/(2.*dx)
+∂u[i, j]/∂h[i, 1 + j] = -0.5*g/dx
+
+For u[i, j] looking at u[_, _]:
+∂u[i, j]/∂u[i, j] = (-2*ν)/Power(dx,2) - (-u(i,-1 + j) + u(i,1 + j))/(2.*dx)
+∂u[i, j]/∂u[i, -1 + j] = ν/Power(dx,2) + u(i,j)/(2.*dx)
+∂u[i, j]/∂u[i, 1 + j] = ν/Power(dx,2) - u(i,j)/(2.*dx)
+∂u[i, j]/∂u[-1 + i, j] = v(i,j)/(2.*dy)
+∂u[i, j]/∂u[1 + i, j] = -0.5*v(i,j)/dy
+
+For u[i, j] looking at v[_, _]:
+∂u[i, j]/∂v[i, j] = -0.5*(-u(-1 + i,j) + u(1 + i,j))/dy
+
+For v[i, j] looking at h[_, _]:
+∂v[i, j]/∂h[-1 + i, j] = g/(2.*dy)
+∂v[i, j]/∂h[1 + i, j] = -0.5*g/dy
+
+For v[i, j] looking at u[_, _]:
+∂v[i, j]/∂u[i, j] = -0.5*(-v(i,-1 + j) + v(i,1 + j))/dx
+
+For v[i, j] looking at v[_, _]:
+∂v[i, j]/∂v[i, -1 + j] = u(i,j)/(2.*dx)
+∂v[i, j]/∂v[i, 1 + j] = -0.5*u(i,j)/dx
+∂v[i, j]/∂v[i, j] = (-2*ν)/Power(dy,2) - (-v(-1 + i,j) + v(1 + i,j))/(2.*dy)
+∂v[i, j]/∂v[-1 + i, j] = ν/Power(dy,2) + v(i,j)/(2.*dy)
+∂v[i, j]/∂v[1 + i, j] = ν/Power(dy,2) - v(i,j)/(2.*dy)

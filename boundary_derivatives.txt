@@ -1,0 +1,169 @@
+### hdot boundaries ###
+
+For boundary case {i -> 1} looking at h[_, _]:
+∂h[1, j]/∂h[1, -1 + j] = μ/Power(dx,2) + u(1,j)/(2.*dx)
+∂h[1, j]/∂h[1, j] = (-2*μ)/Power(dx,2) - μ/Power(dy,2) - (-u(1,-1 + j) + u(1,1 + j))/(2.*dx) + v(1,j)/(2.*dy) - (v(1,j) + v(2,j))/(2.*dy)
+∂h[1, j]/∂h[1, 1 + j] = μ/Power(dx,2) - u(1,j)/(2.*dx)
+∂h[1, j]/∂h[2, j] = μ/Power(dy,2) - v(1,j)/(2.*dy)
+
+For boundary case {i -> 1} looking at u[_, _]:
+∂h[1, j]/∂u[1, j] = -0.5*(-h(1,-1 + j) + h(1,1 + j))/dx
+∂h[1, j]/∂u[1, -1 + j] = h(1,j)/(2.*dx)
+∂h[1, j]/∂u[1, 1 + j] = -0.5*h(1,j)/dx
+
+For boundary case {i -> 1} looking at v[_, _]:
+∂h[1, j]/∂v[1, j] = -0.5*h(1,j)/dy - (-h(1,j) + h(2,j))/(2.*dy)
+∂h[1, j]/∂v[2, j] = -0.5*h(1,j)/dy
+
+For boundary case {i -> n} looking at h[_, _]:
+∂h[n, j]/∂h[-1 + n, j] = μ/Power(dy,2) + v(n,j)/(2.*dy)
+∂h[n, j]/∂h[n, j] = (-2*μ)/Power(dx,2) - μ/Power(dy,2) - (-u(n,-1 + j) + u(n,1 + j))/(2.*dx) - (-v(-1 + n,j) - v(n,j))/(2.*dy) - v(n,j)/(2.*dy)
+∂h[n, j]/∂h[n, -1 + j] = μ/Power(dx,2) + u(n,j)/(2.*dx)
+∂h[n, j]/∂h[n, 1 + j] = μ/Power(dx,2) - u(n,j)/(2.*dx)
+
+For boundary case {i -> n} looking at u[_, _]:
+∂h[n, j]/∂u[n, j] = -0.5*(-h(n,-1 + j) + h(n,1 + j))/dx
+∂h[n, j]/∂u[n, -1 + j] = h(n,j)/(2.*dx)
+∂h[n, j]/∂u[n, 1 + j] = -0.5*h(n,j)/dx
+
+For boundary case {i -> n} looking at v[_, _]:
+∂h[n, j]/∂v[-1 + n, j] = h(n,j)/(2.*dy)
+∂h[n, j]/∂v[n, j] = h(n,j)/(2.*dy) - (-h(-1 + n,j) + h(n,j))/(2.*dy)
+
+For boundary case {j -> 1} looking at h[_, _]:
+∂h[i, 1]/∂h[i, 1] = -(μ/Power(dx,2)) - (2*μ)/Power(dy,2) + u(i,1)/(2.*dx) - (u(i,1) + u(i,2))/(2.*dx) - (-v(-1 + i,1) + v(1 + i,1))/(2.*dy)
+∂h[i, 1]/∂h[i, 2] = μ/Power(dx,2) - u(i,1)/(2.*dx)
+∂h[i, 1]/∂h[-1 + i, 1] = μ/Power(dy,2) + v(i,1)/(2.*dy)
+∂h[i, 1]/∂h[1 + i, 1] = μ/Power(dy,2) - v(i,1)/(2.*dy)
+
+For boundary case {j -> 1} looking at u[_, _]:
+∂h[i, 1]/∂u[i, 1] = -0.5*h(i,1)/dx - (-h(i,1) + h(i,2))/(2.*dx)
+∂h[i, 1]/∂u[i, 2] = -0.5*h(i,1)/dx
+
+For boundary case {j -> 1} looking at v[_, _]:
+∂h[i, 1]/∂v[i, 1] = -0.5*(-h(-1 + i,1) + h(1 + i,1))/dy
+∂h[i, 1]/∂v[-1 + i, 1] = h(i,1)/(2.*dy)
+∂h[i, 1]/∂v[1 + i, 1] = -0.5*h(i,1)/dy
+
+For boundary case {j -> n} looking at h[_, _]:
+∂h[i, n]/∂h[i, -1 + n] = μ/Power(dx,2) + u(i,n)/(2.*dx)
+∂h[i, n]/∂h[i, n] = -(μ/Power(dx,2)) - (2*μ)/Power(dy,2) - (-u(i,-1 + n) - u(i,n))/(2.*dx) - u(i,n)/(2.*dx) - (-v(-1 + i,n) + v(1 + i,n))/(2.*dy)
+∂h[i, n]/∂h[-1 + i, n] = μ/Power(dy,2) + v(i,n)/(2.*dy)
+∂h[i, n]/∂h[1 + i, n] = μ/Power(dy,2) - v(i,n)/(2.*dy)
+
+For boundary case {j -> n} looking at u[_, _]:
+∂h[i, n]/∂u[i, -1 + n] = h(i,n)/(2.*dx)
+∂h[i, n]/∂u[i, n] = h(i,n)/(2.*dx) - (-h(i,-1 + n) + h(i,n))/(2.*dx)
+
+For boundary case {j -> n} looking at v[_, _]:
+∂h[i, n]/∂v[i, n] = -0.5*(-h(-1 + i,n) + h(1 + i,n))/dy
+∂h[i, n]/∂v[-1 + i, n] = h(i,n)/(2.*dy)
+∂h[i, n]/∂v[1 + i, n] = -0.5*h(i,n)/dy
+
+### udot boundaries ###
+
+For boundary case {i -> 1} looking at h[_, _]:
+∂u[1, j]/∂h[1, -1 + j] = g/(2.*dx)
+∂u[1, j]/∂h[1, 1 + j] = -0.5*g/dx
+
+For boundary case {i -> 1} looking at u[_, _]:
+∂u[1, j]/∂u[1, j] = (-2*\[Nu])/Power(dx,2) - (-u(1,-1 + j) + u(1,1 + j))/(2.*dx) - v(1,j)/(2.*dy)
+∂u[1, j]/∂u[1, -1 + j] = \[Nu]/Power(dx,2) + u(1,j)/(2.*dx)
+∂u[1, j]/∂u[1, 1 + j] = \[Nu]/Power(dx,2) - u(1,j)/(2.*dx)
+∂u[1, j]/∂u[2, j] = -0.5*v(1,j)/dy
+
+For boundary case {i -> 1} looking at v[_, _]:
+∂u[1, j]/∂v[1, j] = -0.5*(u(1,j) + u(2,j))/dy
+
+For boundary case {i -> n} looking at h[_, _]:
+∂u[n, j]/∂h[n, -1 + j] = g/(2.*dx)
+∂u[n, j]/∂h[n, 1 + j] = -0.5*g/dx
+
+For boundary case {i -> n} looking at u[_, _]:
+∂u[n, j]/∂u[n, j] = (-2*\[Nu])/Power(dx,2) - (-u(n,-1 + j) + u(n,1 + j))/(2.*dx) + v(n,j)/(2.*dy)
+∂u[n, j]/∂u[n, -1 + j] = \[Nu]/Power(dx,2) + u(n,j)/(2.*dx)
+∂u[n, j]/∂u[n, 1 + j] = \[Nu]/Power(dx,2) - u(n,j)/(2.*dx)
+∂u[n, j]/∂u[-1 + n, j] = v(n,j)/(2.*dy)
+
+For boundary case {i -> n} looking at v[_, _]:
+∂u[n, j]/∂v[n, j] = -0.5*(-u(-1 + n,j) - u(n,j))/dy
+
+For boundary case {j -> 1} looking at h[_, _]:
+∂u[i, 1]/∂h[i, 1] = g/(2.*dx)
+∂u[i, 1]/∂h[i, 2] = -0.5*g/dx
+
+For boundary case {j -> 1} looking at u[_, _]:
+∂u[i, 1]/∂u[i, 1] = (-3*\[Nu])/Power(dx,2) - u(i,1)/(2.*dx) - (u(i,1) + u(i,2))/(2.*dx)
+∂u[i, 1]/∂u[i, 2] = \[Nu]/Power(dx,2) - u(i,1)/(2.*dx)
+∂u[i, 1]/∂u[-1 + i, 1] = v(i,1)/(2.*dy)
+∂u[i, 1]/∂u[1 + i, 1] = -0.5*v(i,1)/dy
+
+For boundary case {j -> 1} looking at v[_, _]:
+∂u[i, 1]/∂v[i, 1] = -0.5*(-u(-1 + i,1) + u(1 + i,1))/dy
+
+For boundary case {j -> n} looking at h[_, _]:
+∂u[i, n]/∂h[i, -1 + n] = g/(2.*dx)
+∂u[i, n]/∂h[i, n] = -0.5*g/dx
+
+For boundary case {j -> n} looking at u[_, _]:
+∂u[i, n]/∂u[i, -1 + n] = \[Nu]/Power(dx,2) + u(i,n)/(2.*dx)
+∂u[i, n]/∂u[i, n] = (-3*\[Nu])/Power(dx,2) - (-u(i,-1 + n) - u(i,n))/(2.*dx) + u(i,n)/(2.*dx)
+∂u[i, n]/∂u[-1 + i, n] = v(i,n)/(2.*dy)
+∂u[i, n]/∂u[1 + i, n] = -0.5*v(i,n)/dy
+
+For boundary case {j -> n} looking at v[_, _]:
+∂u[i, n]/∂v[i, n] = -0.5*(-u(-1 + i,n) + u(1 + i,n))/dy
+
+### vdot boundaries ###
+
+For boundary case {i -> 1} looking at h[_, _]:
+∂v[1, j]/∂h[1, j] = g/(2.*dy)
+∂v[1, j]/∂h[2, j] = -0.5*g/dy
+
+For boundary case {i -> 1} looking at u[_, _]:
+∂v[1, j]/∂u[1, j] = -0.5*(-v(1,-1 + j) + v(1,1 + j))/dx
+
+For boundary case {i -> 1} looking at v[_, _]:
+∂v[1, j]/∂v[1, -1 + j] = u(1,j)/(2.*dx)
+∂v[1, j]/∂v[1, 1 + j] = -0.5*u(1,j)/dx
+∂v[1, j]/∂v[1, j] = (-3*\[Nu])/Power(dy,2) - v(1,j)/(2.*dy) - (v(1,j) + v(2,j))/(2.*dy)
+∂v[1, j]/∂v[2, j] = \[Nu]/Power(dy,2) - v(1,j)/(2.*dy)
+
+For boundary case {i -> n} looking at h[_, _]:
+∂v[n, j]/∂h[-1 + n, j] = g/(2.*dy)
+∂v[n, j]/∂h[n, j] = -0.5*g/dy
+
+For boundary case {i -> n} looking at u[_, _]:
+∂v[n, j]/∂u[n, j] = -0.5*(-v(n,-1 + j) + v(n,1 + j))/dx
+
+For boundary case {i -> n} looking at v[_, _]:
+∂v[n, j]/∂v[-1 + n, j] = \[Nu]/Power(dy,2) + v(n,j)/(2.*dy)
+∂v[n, j]/∂v[n, j] = (-3*\[Nu])/Power(dy,2) - (-v(-1 + n,j) - v(n,j))/(2.*dy) + v(n,j)/(2.*dy)
+∂v[n, j]/∂v[n, -1 + j] = u(n,j)/(2.*dx)
+∂v[n, j]/∂v[n, 1 + j] = -0.5*u(n,j)/dx
+
+For boundary case {j -> 1} looking at h[_, _]:
+∂v[i, 1]/∂h[-1 + i, 1] = g/(2.*dy)
+∂v[i, 1]/∂h[1 + i, 1] = -0.5*g/dy
+
+For boundary case {j -> 1} looking at u[_, _]:
+∂v[i, 1]/∂u[i, 1] = -0.5*(v(i,1) + v(i,2))/dx
+
+For boundary case {j -> 1} looking at v[_, _]:
+∂v[i, 1]/∂v[i, 1] = (-2*\[Nu])/Power(dy,2) - u(i,1)/(2.*dx) - (-v(-1 + i,1) + v(1 + i,1))/(2.*dy)
+∂v[i, 1]/∂v[i, 2] = -0.5*u(i,1)/dx
+∂v[i, 1]/∂v[-1 + i, 1] = \[Nu]/Power(dy,2) + v(i,1)/(2.*dy)
+∂v[i, 1]/∂v[1 + i, 1] = \[Nu]/Power(dy,2) - v(i,1)/(2.*dy)
+
+For boundary case {j -> n} looking at h[_, _]:
+∂v[i, n]/∂h[-1 + i, n] = g/(2.*dy)
+∂v[i, n]/∂h[1 + i, n] = -0.5*g/dy
+
+For boundary case {j -> n} looking at u[_, _]:
+∂v[i, n]/∂u[i, n] = -0.5*(-v(i,-1 + n) - v(i,n))/dx
+
+For boundary case {j -> n} looking at v[_, _]:
+∂v[i, n]/∂v[i, -1 + n] = u(i,n)/(2.*dx)
+∂v[i, n]/∂v[i, n] = (-2*\[Nu])/Power(dy,2) + u(i,n)/(2.*dx) - (-v(-1 + i,n) + v(1 + i,n))/(2.*dy)
+∂v[i, n]/∂v[-1 + i, n] = \[Nu]/Power(dy,2) + v(i,n)/(2.*dy)
+∂v[i, n]/∂v[1 + i, n] = \[Nu]/Power(dy,2) - v(i,n)/(2.*dy)
