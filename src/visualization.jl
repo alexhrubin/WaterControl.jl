@@ -1,7 +1,7 @@
 using Plots
 using Printf
 
-function create_animation_1D(sol, prob, fps=20)
+function create_animation(sol, prob, fps=20)
     final_time = sol.t[end]
     n_frames = Int(final_time * fps)
     frame_steps = LinRange(0, final_time, n_frames)
@@ -34,7 +34,7 @@ function create_animation_1D(sol, prob, fps=20)
 end
 
 
-function create_surface_animation_2D(sol, prob, fps=20)
+function create_surface_animation(sol, prob, fps=20)
     nx = prob.nx
     ny = prob.ny
     final_time = sol.t[end]
@@ -75,7 +75,7 @@ function create_surface_animation_2D(sol, prob, fps=20)
 end
 
 
-function create_contour_animation_2D(sol, prob, fps=20)
+function create_contour_animation(sol, prob, fps=20)
     nx = prob.nx
     ny = prob.ny
     final_time = sol.t[end]
