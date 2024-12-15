@@ -100,3 +100,23 @@ end
         end
     end
 end
+
+
+# testing the mesh for completeness
+# for he in mesh.edges
+#     if he.twin === nothing
+#         println("twin missing", he)
+#     end
+#     if he.next === nothing
+#         println("next missing", he)
+#     end
+#     if he.prev === nothing
+#         println("prev missing", he)
+#     end
+# end
+
+# for i in 1:height+1, j in 1:width+1
+#     if !isassigned(mesh.points, i, j)
+#         println("no he assigned", i, j)
+#     end
+# end

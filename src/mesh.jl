@@ -210,18 +210,16 @@ end
 
 function dual_cell(he1, mesh)
     points = Point[]
-    for _ in 1:1
-        he2, he3 = _other_two_hes(he1, mesh)
+    he2, he3 = _other_two_hes(he1, mesh)
 
-        mp = midpoint(he1.origin, he2.origin)
-        push!(points, mp)
-        
-        cent = centroid(he1.origin, he2.origin, he3.origin)
-        push!(points, cent)
+    mp = midpoint(he1.origin, he2.origin)
+    push!(points, mp)
+    
+    cent = centroid(he1.origin, he2.origin, he3.origin)
+    push!(points, cent)
 
-        mp = midpoint(he1.origin, he3.origin)
-        push!(points, mp)
-    end
+    mp = midpoint(he1.origin, he3.origin)
+    push!(points, mp)
 
     push!(points, he1.origin)
     push!(points, points[1])  # to close the polygon
@@ -257,7 +255,45 @@ function dual_mesh_value(point, mesh)
         push!(face_values, face.value)
     end
 
-    return sum(face_values .* areas)
+    return sum(face_values .* areas) / sum(areas)
+end
+
+
+function dual_mesh_area(point::Point, mesh::Mesh)
+    hes = WaterControl.iterate_around_vertex(point, mesh)
+    hes = filter(he -> he.face !== nothing, hes)
+
+    areas = []
+    for he in hes
+        pts = WaterControl.dual_cell(he, mesh)
+        area = quad_area(pts)
+        push!(areas, area)
+    end
+
+    return sum(areas)
+end
+
+
+function dual_mesh_areas(mesh::Mesh)
+    height, width = size(mesh.points)
+    dual_areas = Matrix{Float64}(undef, height, width)
+    for point in mesh.points
+        dual_areas[point.i, point.j] = dual_mesh_area(point, mesh)
+    end
+
+    # Edges (not corners)
+    dual_areas[1, 2:end-1] .*= 2  # top
+    dual_areas[end, 2:end-1] .*= 2  # bottom
+    dual_areas[2:end-1, 1] .*= 2  # left
+    dual_areas[2:end-1, end] .*= 2  # right
+    
+    # Corners
+    dual_areas[1, 1] *= 6  # top-left
+    dual_areas[1, end] *= 3  # top-right
+    dual_areas[end, 1] *= 3  # bottom-left
+    dual_areas[end, end] *= 6  # bottom-right
+
+    return dual_areas
 end
 
 
