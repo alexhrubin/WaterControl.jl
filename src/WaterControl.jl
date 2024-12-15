@@ -7,6 +7,7 @@ include("visualization.jl")
 include("mesh.jl")
 include("galerkin.jl")
 include("relax.jl")
+include("caustics.jl")
 
 export ShallowWaterProblem1D
 export ShallowWaterProblem2D

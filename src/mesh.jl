@@ -1,13 +1,13 @@
 using WriteVTK
 
 mutable struct Point
-    x::Float64
-    y::Float64
+    x::Number
+    y::Number
     i::Union{Int, Nothing}  # Image row index
     j::Union{Int, Nothing}  # Image column index
 
-    Point(x::Float64, y::Float64) = new(x, y, nothing, nothing)
-    Point(x::Float64, y::Float64, i::Int, j::Int) = new(x, y, i, j)
+    Point(x::Number, y::Number) = new(x, y, nothing, nothing)
+    Point(x::Number, y::Number, i::Int, j::Int) = new(x, y, i, j)
 end
 
 
