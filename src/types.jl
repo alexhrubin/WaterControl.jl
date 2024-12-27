@@ -43,6 +43,7 @@ end
 
 struct ShallowWaterProblem2D
     # Physical parameters
+    depth::Number
     Lx::Float64    # domain length in x direction
     Ly::Float64    # domain length in y direction
     nx::Int       # number of spatial points in x direction
@@ -70,6 +71,7 @@ struct ShallowWaterProblem2D
     # Constructor
     function ShallowWaterProblem2D(
         target::Vector{Float64};
+        depth=1.0,
         Lx=10.0,
         Ly=10.0,
         nx=100,
@@ -91,6 +93,7 @@ struct ShallowWaterProblem2D
         v0 = zeros(nx * ny)
         
         new(
+            depth,
             Lx,
             Ly,
             nx,

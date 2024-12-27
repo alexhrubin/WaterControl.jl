@@ -175,7 +175,7 @@ function solve_forward(problem::ShallowWaterProblem2D, acceleration::DiscreteAcc
     end
 
     # Initial conditions
-    h0 = ones(nx * ny)
+    h0 = ones(nx * ny) * problem.depth
     u0 = zeros(nx * ny)
     v0 = zeros(nx * ny)
     w0 = vcat(h0, u0, v0)
