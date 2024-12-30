@@ -105,3 +105,26 @@ function create_contour_animation(sol, prob, fps=20)
 
     return gif(anim)
 end
+
+
+function plot_triangle_faces(mesh)
+    plt = plot(yflip=true, size=(500, 500))
+    num_faces = length(mesh.faces)
+    midpoint = div(num_faces, 2)
+    
+    for (i, face) in enumerate(mesh.faces)
+        points = WaterControl.traverse_triangle(face, mesh)
+        x_coords = map(p -> p.x, points)
+        y_coords = map(p -> p.y, points)
+        
+        color = i <= midpoint ? RGBA(1,0,0,0.5) : RGBA(0,0,1,0.5)
+        
+        plot!(Shape(x_coords, y_coords),
+            label=false,
+            aspect_ratio=:equal,
+            color=color,
+            linewidth=0
+        )
+    end
+    return plt
+end

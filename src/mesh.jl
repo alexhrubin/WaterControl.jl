@@ -3,11 +3,12 @@ using WriteVTK
 mutable struct Point
     x::Number
     y::Number
+    z::Number
     i::Union{Int, Nothing}  # Image row index
     j::Union{Int, Nothing}  # Image column index
 
-    Point(x::Number, y::Number) = new(x, y, nothing, nothing)
-    Point(x::Number, y::Number, i::Int, j::Int) = new(x, y, i, j)
+    Point(x::Number, y::Number) = new(x, y, 0, nothing, nothing)
+    Point(x::Number, y::Number, i::Int, j::Int) = new(x, y, 0, i, j)
 end
 
 
@@ -156,11 +157,11 @@ function make_mesh(img::Matrix{Float64}, physical_height::Float64, physical_widt
 end
 
 
-function traverse_triangle(point, mesh, direction=:clockwise)
+function traverse_triangle(face, mesh, direction=:clockwise)
     if direction == :clockwise
-        he = mesh.point_edge[point.i, point.j]
+        he = mesh.edges[face.edge]
     else
-        he = mesh.edges[mesh.point_edge[point.i, point.j].twin]
+        he = mesh.edges[mesh.edges[face.edge].twin]
     end
 
     points = [he.origin]
